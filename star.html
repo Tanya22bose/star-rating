@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Rating</title>
+</head>
+<style>
+    h1,
+    p {
+        text-align: center;
+    }
+
+    .rating {
+        display: flex;
+        justify-content: center;
+    }
+
+    .star {
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .star:hover {
+        color: gold;
+    }
+
+    .star.filled {
+        color: gold;
+    }
+</style>
+
+<body>
+    <h1>star rating</h1>
+    <div class="rating">
+        <span id="stars">
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+            </s>
+    </div>
+    <p>rating: <span id="current-rating">0/5</span></p>
+</body>
+<script>
+    const stars = document.querySelectorAll(".star");
+    const currentRating = document.querySelector("#current-rating");
+
+    stars.forEach((star) => {
+        star.addEventListener("click", (e) => {
+            const value = star.getAttribute("data-value");
+            updateRating(value)
+        })
+    })
+
+    function updateRating(value) {
+        currentRating.textContent = `${value}/5`
+        stars.forEach((star) => {
+            const starValue = star.getAttribute("data-value")
+            star.classList.toggle("filled", starValue <= value)
+        })
+    }
+</script>
+
+</html>
